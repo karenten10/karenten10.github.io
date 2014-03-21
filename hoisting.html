@@ -1,0 +1,70 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<script type="text/javascript">
+
+			var myvar = "global value";
+			console.log("=====> myvar = " + myvar); //global value
+
+			
+			(function() {
+				console.log("=========================================");
+				console.log("====> in function 1 myvar = " + myvar); //undefined
+
+				var myvar = "local value";
+
+				console.log("====> in function 2 myvar = " + myvar); //local value
+			})();
+			
+
+			/*
+			//以上這段等於這段:
+			//Variable Declarations are Hoisted
+			//to the top behind the scenes
+			//變數會被瀏覽器hoisting到最top,但initialization不會被hoisting到top,
+			//所以in function 1 myvar會印出undefined
+			//因此請把變數都宣告在function最上面,這樣就不會有問題了
+			//瀏覽器behind the scenes會把程式變成這樣
+			(function() {
+				var myvar; //也可以說是var myvar = undefined;
+				console.log("====> in function 1 myvar = " + myvar); //undefined
+
+				myvar = "local value";
+
+				console.log("====> in function 2 myvar = " + myvar); //local value
+			})();
+			*/
+
+			
+			(function() {
+				console.log("=========================================");
+				newFunction();
+
+				//Function Declaration會被hoisting到top
+				function newFunction() {
+					console.log("Hello World! (Function Declartion)");
+				}
+
+				/*
+				//但Function Expression不會被hoisting到top
+				//所以會有錯誤: Uncaught TypeError: undefined is not a function
+				var newFunction = function() {
+					console.log("Hello World (Function Expression)");
+				};
+				*/
+				
+			})();
+			
+		</script>	
+	</head>
+	<body>
+		<div id="div0" style="margin-top:100px;text-align:center;">
+			<div id="div1">
+				中文
+			</div>
+			<input type="button" id="domNodeBtn" value="DOM Node">
+			
+		</div>
+	</body>
+</html>
